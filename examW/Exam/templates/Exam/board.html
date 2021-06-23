@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>시험 보기</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const csrftoken = getCookie('csrftoken');
+
+            function submitMarkup(){
+                let h=$('#html').val();
+                let c=$('#style').val();
+                let mup=`<style>${c}</style>${h}`;
+                $('scaijowerfij').html(mup);
+            }
+            function submitJS(){
+                $('scaijowerfij').html('기다려 주세요...');
+                document.getElementById('jsb').disabled=true;
+                $.ajax({
+                    url: "execjs",
+                    type:'POST',
+                    headers: {
+                        'X-CSRFToken':csrftoken,
+                    },
+                    data: {
+                        'code':$('#js').val(),
+                    },
+                    success: (result)=>{$('scaijowerfij').html(result);
+                    document.getElementById('jsb').disabled=false;
+                    },
+                    error: (log)=>{
+                        alert("서버가 응답하지 않는 것 같다.. 잠시 후 다시 시도하거나 개발자에게 문의하자!");
+                        $('scaijowerfij').html(log);
+                        document.getElementById('jsb').disabled=false;
+                    }
+                });
+            }
+            function submitAns(){
+                $.ajax({
+                    url: "#",
+                    type:'POST',
+                    headers: {
+                        'X-CSRFToken':csrftoken,
+                    },
+                    data: {
+                        'answer':$('#answer').val(),
+                    },
+                    success: (result)=>{alert("잘 제출되었어요~!");},
+                    error: (log)=>{alert("서버가 응답하지 않는 것 같다.. 잠시 후 다시 시도하거나 개발자에게 문의하자!");}
+                });
+            }
+
+            $(document).ready(function(){
+                $("textarea").keydown(function(e){
+                    if(event.keyCode===9){
+                        var v=this.value, s=this.selectionStart, e=this.selectionEnd;
+                        this.value=v.substring(0, s)+'\t'+v.substring(e);
+                        this.selectionStart=this.selectionEnd=s+1;
+                        return false;
+                }
+                })
+            })
+            let rest0=Math.floor((1624170084896-new Date().getTime())/1000);
+            var interval=setInterval(function(){
+                let hrs=Math.floor(rest0/3600);
+                let mins=Math.floor((rest0%3600)/60);
+                let scs=rest0%60;
+                if(rest0<=0) {
+                    document.getElementById("timer").innerHTML='남은 시간 00:00:00';
+                    clearInterval(interval);
+                }
+                else{
+                    document.getElementById("timer").innerHTML=`남은 시간 ${hrs}:${mins}:${scs}`;
+                }
+                rest0--;
+            },1000);
+        </script>
+        <style>
+
+            @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+            wiefjioajfo {
+                display:grid;
+                font-family: 'Jeju Gothic', sans-serif;
+                grid-template-areas:"qeriwoq qeriwoq"
+                                    "ajoiwefni scaijowefij"
+                                    "feriwoq feriwoq";
+                grid-template-rows: auto;
+                grid-template-columns: 50% 50%;
+            }
+            qeriwoq {
+                grid-area: qeriwoq;
+                margin: 20px;
+                border: 2px solid;
+                background-color: white;
+                border-radius: 10px;
+                padding: 20px;
+            }
+            ajoiwefni {
+                grid-area: ajoiwefni;
+                padding: 5px;
+                margin: 20px;
+                border: 2px solid;
+                border-radius: 10px;
+            }
+            scaijowerfij {
+                grid-area: scaijowefij;
+                margin: 20px;
+                padding: 5px;
+                border: 2px solid;
+                border-radius: 10px;
+            }
+            feriwoq {
+                grid-area: feriwoq;
+                margin-bottom: 70px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="timer">남은 시간: 준비중</div>
+        <button onclick="location.href='../home';">목록</button><br>
+        <wiefjioajfo>
+            {%block content%}
+            {%endblock%}
+            <scaijowerfij></scaijowerfij>
+            <feriwoq>
+                <label for="answer">답안</label>
+                <textarea id="answer" name="answer" style="width: 50%;"></textarea><br>
+                <button onclick="submitAns();">답안 제출하기</button>
+                <hr>
+                제출했던 답안:<br>
+                {% for a in ansz %}
+                    {{ a.a }}<hr>
+                {% endfor %}
+
+            </feriwoq>
+        </wiefjioajfo>
+        {% if submit %}
+            <script type="text/javascript">alert("잘 제출됐네요.");</script>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,20 @@
+{%extends 'Exam/board.html' %}
+{%block content%}
+<qeriwoq>
+    <h2>1. 이 시험에 익숙해져 보자-1</h2><hr>
+    이 시험의 '연습판'은 2가지 유형이 있다.<br>
+    - 하나는 지금 보고 있는 이 화면으로, 왼쪽 상자의 빈칸에 각각 CSS, HTML을 작성하고 결과를 확인할 수 있다.<br>
+    - 다른 하나는 왼쪽 상자의 빈칸에 javascript 코드를 작성하고 결과를 확인할 수 있는데, 그건 2번 문제에서 체험해 보자.<br>
+    제출 답안을 위한 칸과 제출 버튼은 그보다 아래쪽에 있다. 위의 것을 원하는 만큼 경험해 보고 아무거나 제출하자.<br>
+    <button onclick="location.href='../../q/2';">2번 문제로</button>
+</qeriwoq>
+<ajoiwefni>
+    〈html〉<br>&emsp;〈head〉<br>&emsp;&emsp;〈style〉<hr>
+    <textarea id="style" style="width: 90%; height: 220px; overflow:visible; margin-left:5%; resize: none;"></textarea>
+    <hr>&emsp;&emsp;〈/style〉<br>&emsp;〈/head〉<br>&emsp;〈body〉<hr>
+    <textarea id="html" style="width: 90%; height: 220px; overflow:visible; margin-left:5%; resize: none;"></textarea>
+    <hr>&emsp;〈/body〉<br>〈/html〉<hr>
+    <button onclick="submitMarkup();" style="margin-left:5%;">확인하기</button>
+</ajoiwefni>
+<script type="text/javascript">submitMarkup();</script>
+{%endblock%}

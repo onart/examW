@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>시험 보기</title>
+  </head>
+  <body>
+    <h1>
+        규칙
+    </h1>
+    <h2>
+        <li>모든 답안 제출은 바로 이 사이트를 통해서 이루어진다.</li>
+        <li>IP주소 검사할 것이다. 대리시험 금지, 통피 금지. 우리 집에서 유선 연결된 PC 또는 와이파이 연결로만 진행하자.</li>
+        <li>문제에 대한 답안은 여러 번 제출해도 된다. 단, 나의 재량에 의해 그 중에 정답이 있어도 구두로 물을 수 있다(특히 마지막 제출본이 오답인 경우).</li>
+        <li>문제를 푸는 순서 또한 자유롭게 하면 된다.</li>
+        <li>인터넷 사이트 참고 가능. 일반적으로 <a href="https://developer.mozilla.org/ko/docs/Learn" target="_blank">https://developer.mozilla.org/ko/docs/Learn</a>만 보면 모든 것을 풀 수 있다.</li>
+        <li>기한은 최초 접속 시점으로부터 168시간이지만(자동으로 기록됨), 실제로 그만큼 걸릴 만한 시험은 아니다. 길어야 6시간 정도를 생각하고 있다. 그러니 성실히 임하자. 답안이 불성실하게 느껴지면 내가 그만두겠다.</li>
+        <li style="color:red">자바스크립트에서 무한 루프가 든 코드를 실행하려 하면 서버 내렸다가 다시 켜야 한다. 절대 조심하자!!</li>
+    </h2>
+    <h1>
+        출제 형식
+    </h1>
+    <h2>
+        <li>단답형</li>
+        <li>서술형(단순히 인터넷이나 공식 문서에서 찾아보고 무슨 뜻인지 되새기라는 뜻)</li>
+        <li>코드 작성(대부분의 출제 유형은 짤막한 코드 작성과 서술형이다)</li>
+        <li>시험에는 배우지 않은 것이 나올 수 있다. 인터넷에 스스로 검색하고 배우라는 뜻이며, 절대 어렵게 안 나온다.</li>
+    </h2>
+    <h1>
+        문항
+    </h1>
+    <h2>
+        {% for data in qus %}
+            <a href="q/{{ forloop.counter }}"> [{{ forloop.counter }}] </a>
+            &nbsp;
+        {% endfor %}
+    </h2>
+  </body>
+</html>
